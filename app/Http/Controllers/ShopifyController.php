@@ -392,10 +392,12 @@ class ShopifyController extends Controller
         $product = $order_items[0]["title"];
         $phone = str_replace('+', '', $phone);
 
-        $tracking_number = $all["fulfillments"][0]["tracking_number"];
-        $tracking_url = $all["fulfillments"][0]["tracking_url"];
+       
 
-        if ($tracking_number && $tracking_url) {
+        if ($all["fulfillments"][0]["tracking_number"] && $all["fulfillments"][0]["tracking_url"]) {
+            
+            $tracking_number = $all["fulfillments"][0]["tracking_number"];
+            $tracking_url = $all["fulfillments"][0]["tracking_url"];
 
             $product_info_message = "O seu produto " . $product . " saiu para a entrega :truck: segue informação para acompanhar de perto a viagem: codigo de rastreio: ".$tracking_number." url rastreio:".$tracking_url."";
 
