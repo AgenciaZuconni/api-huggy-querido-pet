@@ -48,6 +48,8 @@ class ShopifyController extends Controller
         $header = $request->headers->all();
         $code = empty($header['code'][0]) ? null : $header['code'][0];
         $cliente = empty($header['cliente'][0]) ? '' : $header['cliente'][0];
+        $url="Boleto não encontrado ou inexistente";
+        $links="Boleto não encontrado ou inexistente";
 
         $response = $this->orders("pending", $cliente);
 
