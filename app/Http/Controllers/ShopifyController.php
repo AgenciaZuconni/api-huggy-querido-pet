@@ -416,7 +416,7 @@ class ShopifyController extends Controller
                 ];
             } else {
                 $the_client_id = $the_client[0]->id;
-
+                   echo $the_client_id;
                 $url_update = "https://api.huggy.app/v2/contacts/" . $the_client_id;
             $data = '{"name":"' . $name . '", "email":"' . $email . '", "mobile":"' . $phone . '", "phone":"' . $phone . '"}';
 
@@ -454,7 +454,8 @@ class ShopifyController extends Controller
                 $error_whatsapp = curl_error($curl_whatsapp);
                 $info_whatsapp = curl_getinfo($curl_whatsapp);
                 curl_close($curl_whatsapp);
-
+                 
+                echo $resp_whatsapp;
 
                 if ($error_whatsapp) {
                     return [
