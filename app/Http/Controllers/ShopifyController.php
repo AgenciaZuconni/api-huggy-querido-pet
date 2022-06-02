@@ -417,6 +417,28 @@ class ShopifyController extends Controller
             } else {
                 $the_client_id = $the_client[0]->id;
 
+                $url_update = "https://api.huggy.app/v2/contacts/" . $the_client_id;
+            $data = '{"name":"' . $name . '", "email":"' . $email . '", "mobile":"' . $phone . '", "phone":"' . $phone . '"}';
+
+            $curl_update = curl_init($url_update);
+            curl_setopt($curl_update, CURLOPT_URL, $url_update);
+            curl_setopt($curl_update, CURLOPT_CUSTOMREQUEST,  'PUT');
+            curl_setopt($curl_update, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_update, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($curl_update, CURLOPT_POSTFIELDS,  $data);
+            $resp_update = curl_exec($curl_update);
+            $error_update = curl_error($curl_update);
+            $info_update = curl_getinfo($curl_update);
+            curl_close($curl_update);
+
+            if ($error_update) {
+                return [
+                    "success" => false,
+                    "message" => "curl error in client update",
+                    "code" => $info_update['http_code'],
+                    "error" => $error_update
+                ];
+            }
 
                 $url_whatsapp = "https://api.huggy.app/v2/flows/" . env('HUGGY_FLOW_ID_DELIVERY') . "/contact/" . $the_client_id . "/exec";
                 $data = '{"uuid":"' . env("HUGGY_CHANEL_UUID") . '", "variables":{ "produto":"'.$product.'","codigo_rastreio":"'.$tracking_number.'","link_rastreio":"'. $tracking_url.'"}, "whenInChat": true, "whenWaitForChat": true, "whenInAuto": true}';
