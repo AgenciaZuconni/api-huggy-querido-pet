@@ -78,7 +78,7 @@ class ShopifyController extends Controller
                             'message' => "Você utilizou o cloudFox para o pagamento. Seu token para pedir a segunda via do boleto é: $url"
                         ];
                     }
-                   if($note['value']!=null || $note['value']!=""){
+                   if($note['value']!=null && $note['value']!=""){
                     $url = $note['value'];
                    }
                     return [
